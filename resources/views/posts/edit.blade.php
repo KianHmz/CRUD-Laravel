@@ -12,9 +12,9 @@
 
                 <div class="mb-4">
                     <label for="title" class="block mb-1" style="color: var(--color-text);">Title</label>
-                    <input type="text" id="title" name="title" required
+                    <input type="text" id="title" name="title"
                         class="w-full px-3 py-2 rounded text-black placeholder-white"
-                        placeholder="Enter post title" value="{{old('category')}}"
+                        placeholder="Enter post title" value="{{old('title')}}"
                         style="background-color: white;">
                     @error('title')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -23,9 +23,10 @@
 
                 <div class="mb-4">
                     <label for="category" class="block mb-1" style="color: var(--color-text);">Category</label>
-                    <input type="text" id="category" name="category" required
-                        class="w-full px-3 py-2 rounded text-black placeholder-white" placeholder="Enter post category"
-                        value="{{ old('category') }}" style="background-color: white;">
+                    <input type="text" id="category" name="category"
+                        class="w-full px-3 py-2 rounded text-black placeholder-white"
+                        placeholder="Enter post category" value="{{old('category')}}"
+                        style="background-color: white;">
                     @error('category')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -33,7 +34,7 @@
 
                 <div class="mb-6">
                     <label for="description" class="block mb-1" style="color: var(--color-text);">Description</label>
-                    <textarea id="description" name="description" rows="5" required
+                    <textarea id="description" name="description" rows="5" 
                         class="w-full px-3 py-2 rounded text-black placeholder-white" placeholder="Write post description..."
                         style="background-color: white;">{{old('description')}}</textarea>
                     @error('description')
