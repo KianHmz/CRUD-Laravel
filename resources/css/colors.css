@@ -1,0 +1,25 @@
+@layer base {
+    :root {
+        --color-bg: #1f2937;
+        --color-text: #f3f4f6;
+        --color-header: #111827;
+        --color-footer: #111827;
+        --color-border: #374151;
+        --color-link: #d1d5db;
+        --color-link-hover: #ffffff;
+        --color-table-head: #374151;
+        --color-table-row-hover: rgba(55, 65, 81, 0.5);
+        --color-button-create: #046C4E;
+        --color-button-create-hover: #014737;
+        --color-button-edit: #3b82f6;
+        --color-button-edit-hover: #1d4ed8;
+        --color-button-delete: #ef4444;
+        --color-button-delete-hover: #b91c1c;
+        --color-muted: #9ca3af;
+    }
+
+    body {
+        background-color: var(--color-bg);
+        color: var(--color-text);
+    }
+}
