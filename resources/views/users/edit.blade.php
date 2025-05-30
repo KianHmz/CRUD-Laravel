@@ -6,14 +6,15 @@
 <div class="p-6">
     <div class="max-w-3xl mx-auto my-8" style="background-color: var(--color-header); padding: 2rem; border-radius: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
 
-        <form method="POST" action="{{ route('users.store') }}">
+        <form method="POST" action="{{ route('users.update',$user->id) }}">
             @csrf
+            @method('PUT')
 
             <div class="mb-4">
                 <label for="name" class="block mb-1" style="color: var(--color-text);">Name</label>
                 <input type="text" id="name" name="name"
                     class="w-full px-3 py-2 rounded text-black placeholder-white"
-                    placeholder="Enter full name" value="{{old('name')}}"
+                    placeholder="Enter full name" value="{{old('name',$user->name)}}"
                     style="background-color: white;">
                 @error('name')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -24,7 +25,7 @@
                 <label for="email" class="block mb-1" style="color: var(--color-text);">Email</label>
                 <input type="email" id="email" name="email"
                     class="w-full px-3 py-2 rounded text-black placeholder-white"
-                    placeholder="Enter email address" value="{{old('email')}}"
+                    placeholder="Enter email address" value="{{old('email',$user->email)}}"
                     style="background-color: white;">
                 @error('email')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
