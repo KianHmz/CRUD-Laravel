@@ -30,7 +30,8 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        $user = User::create($request->validated());
+        return redirect()->route('users.index')->with('success', "User {$user->id} created!");
     }
 
     /**
@@ -60,7 +61,7 @@ class UserController extends Controller
             unset($data['password']);
         }
         $user->update($data);
-        return redirect()->route('users.index')->with('success', "User {$user->id} updated");
+        return redirect()->route('users.index')->with('success', "User {$user->id} updated!");
     }
 
     /**
@@ -69,6 +70,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         User::destroy($user->id);
-        return redirect()->route('users.index')->with('success', "User {$user->id} deleted");
+        return redirect()->route('users.index')->with('success', "User {$user->id} deleted!");
     }
 }
