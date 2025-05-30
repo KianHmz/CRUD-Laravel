@@ -33,18 +33,22 @@
                                 <td class="px-6 py-4">{{ $post->user_id }}</td>
                                 <td class="px-6 py-4">{{ $post->created_at }}</td>
                                 <td class="px-6 py-4">
-                                    <a href="#" class="text-sm px-3 py-1 rounded"
+                                    <a href="{{ route('posts.edit', $post->id) }}" class="text-sm px-3 py-1 rounded"
                                         style="background-color: var(--color-button-edit); color: white;"
                                         onmouseover="this.style.backgroundColor='var(--color-button-edit-hover)'"
                                         onmouseout="this.style.backgroundColor='var(--color-button-edit)'">
                                         Edit
                                     </a>
-                                    <button class="text-sm px-3 py-1 rounded ml-2"
-                                        style="background-color: var(--color-button-delete); color: white;"
-                                        onmouseover="this.style.backgroundColor='var(--color-button-delete-hover)'"
-                                        onmouseout="this.style.backgroundColor='var(--color-button-delete)'">
-                                        Delete
-                                    </button>
+                                    <form action="{{ route('posts.destroy', $post->id) }}" method="post" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="text-sm px-3 py-1 rounded ml-2"
+                                            style="background-color: var(--color-button-delete); color: white;"
+                                            onmouseover="this.style.backgroundColor='var(--color-button-delete-hover)'"
+                                            onmouseout="this.style.backgroundColor='var(--color-button-delete)'">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

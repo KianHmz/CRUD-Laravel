@@ -6,7 +6,7 @@
     <div class="p-6">
         <div class="max-w-5xl mx-auto my-2">
 
-            <a href="{{route('users.create')}}" class="text-m px-4 py-2 rounded"
+            <a href="{{ route('users.create') }}" class="text-m px-4 py-2 rounded"
                 style="background-color: var(--color-button-create); color: white;"
                 onmouseover="this.style.backgroundColorF= 'var(--color-button-create-hover)'"
                 onmouseout="this.style.backgroundColor= 'var(--color-button-create)'">
@@ -24,63 +24,31 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y" style="border-color: var(--color-border);">
-                        <tr class="hover:[background-color:var(--color-table-row-hover)]">
-                            <td class="px-6 py-4">1</td>
-                            <td class="px-6 py-4">Alice Smith</td>
-                            <td class="px-6 py-4">alice@example.com</td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="text-sm px-3 py-1 rounded"
-                                    style="background-color: var(--color-button-edit); color: white;"
-                                    onmouseover="this.style.backgroundColor= 'var(--color-button-edit-hover)'"
-                                    onmouseout="this.style.backgroundColor= 'var(--color-button-edit)'">
-                                    Edit
-                                </a>
-                                <button class="text-sm px-3 py-1 rounded ml-2"
-                                    style="background-color: var(--color-button-delete); color: white;"
-                                    onmouseover="this.style.backgroundColor='var(--color-button-delete-hover)'"
-                                    onmouseout="this.style.backgroundColor='var(--color-button-delete)'">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:[background-color:var(--color-table-row-hover)]">
-                            <td class="px-6 py-4">2</td>
-                            <td class="px-6 py-4">Bob Johnson</td>
-                            <td class="px-6 py-4">bob@example.com</td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="text-sm px-3 py-1 rounded"
-                                    style="background-color: var(--color-button-edit); color: white;"
-                                    onmouseover="this.style.backgroundColor= 'var(--color-button-edit-hover)'"
-                                    onmouseout="this.style.backgroundColor= 'var(--color-button-edit)'">
-                                    Edit
-                                </a>
-                                <button class="text-sm px-3 py-1 rounded ml-2"
-                                    style="background-color: var(--color-button-delete); color: white;"
-                                    onmouseover="this.style.backgroundColor='var(--color-button-delete-hover)'"
-                                    onmouseout="this.style.backgroundColor='var(--color-button-delete)'">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:[background-color:var(--color-table-row-hover)]">
-                            <td class="px-6 py-4">3</td>
-                            <td class="px-6 py-4">Charlie Davis</td>
-                            <td class="px-6 py-4">charlie@example.com</td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="text-sm px-3 py-1 rounded"
-                                    style="background-color: var(--color-button-edit); color: white;"
-                                    onmouseover="this.style.backgroundColor= 'var(--color-button-edit-hover)'"
-                                    onmouseout="this.style.backgroundColor= 'var(--color-button-edit)'">
-                                    Edit
-                                </a>
-                                <button class="text-sm px-3 py-1 rounded ml-2"
-                                    style="background-color: var(--color-button-delete); color: white;"
-                                    onmouseover="this.style.backgroundColor='var(--color-button-delete-hover)'"
-                                    onmouseout="this.style.backgroundColor='var(--color-button-delete)'">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
+                        @foreach ($users as $user)
+                            <tr class="hover:[background-color:var(--color-table-row-hover)]">
+                                <td class="px-6 py-4">{{ $user->id }}</td>
+                                <td class="px-6 py-4">{{ $user->name }}</td>
+                                <td class="px-6 py-4">{{ $user->email }}</td>
+                                <td class="px-6 py-4">
+                                    <a href="{{ route('users.edit', $user->id) }}" class="text-sm px-3 py-1 rounded"
+                                        style="background-color: var(--color-button-edit); color: white;"
+                                        onmouseover="this.style.backgroundColor= 'var(--color-button-edit-hover)'"
+                                        onmouseout="this.style.backgroundColor= 'var(--color-button-edit)'">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="post" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="text-sm px-3 py-1 rounded ml-2"
+                                            style="background-color: var(--color-button-delete); color: white;"
+                                            onmouseover="this.style.backgroundColor='var(--color-button-delete-hover)'"
+                                            onmouseout="this.style.backgroundColor='var(--color-button-delete)'">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
