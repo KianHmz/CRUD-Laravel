@@ -7,7 +7,7 @@
         <div class="max-w-5xl mx-auto my-2">
 
             @if (session('success'))
-                <x-alerts.alert-success :message="(session('success'))" />
+                <x-alerts.alert-success :message="session('success')" />
             @endif
 
             <a href="{{ route('users.create') }}" class="text-m px-4 py-2 rounded"
@@ -29,7 +29,8 @@
                     </thead>
                     <tbody class="divide-y" style="border-color: var(--color-border);">
                         @foreach ($users as $user)
-                            <tr class="hover:[background-color:var(--color-table-row-hover)]">
+                            <tr onclick="window.location='{{ route('users.show', $user->id) }}'"
+                                class="hover:[background-color:var(--color-table-row-hover)] hover:cursor-pointer">
                                 <td class="px-6 py-4">{{ $user->id }}</td>
                                 <td class="px-6 py-4">{{ $user->name }}</td>
                                 <td class="px-6 py-4">{{ $user->email }}</td>
