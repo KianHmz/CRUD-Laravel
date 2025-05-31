@@ -14,7 +14,7 @@
                     <label for="title" class="block mb-1" style="color: var(--color-text);">Title</label>
                     <input type="text" id="title" name="title" required
                         class="w-full px-3 py-2 rounded text-black placeholder-white"
-                        placeholder="Enter post title" value="{{old('category')}}"
+                        placeholder="Enter post title" value="{{old('title')}}"
                         style="background-color: white;">
                     @error('title')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>

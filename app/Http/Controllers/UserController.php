@@ -30,7 +30,9 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $user = User::create($request->validated());
+        $data = $request->validated();
+        $data['password'] = bcrypt($data['password']);
+        $user = User::create($data);
         return redirect()->route('users.index')->with('success', "User {$user->id} created!");
     }
 
@@ -57,10 +59,15 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $data = $request->validated();
-        if (empty($data['password'])) {
+
+        if (!empty($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        } else {
             unset($data['password']);
         }
+
         $user->update($data);
+
         return redirect()->route('users.index')->with('success', "User {$user->id} updated!");
     }
 

@@ -30,7 +30,10 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['user_id'] = 3;
+        $post = Post::create($data);
+        return redirect()->route('posts.index')->with('success', "Post {$post->id} created.");
     }
 
     /**

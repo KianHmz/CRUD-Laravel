@@ -4,7 +4,11 @@
 
 @section('content')
     <div class="p-6">
-        <div class="max-w-7xl mx-auto my-2">
+        <div class="max-w-6xl mx-auto my-2">
+
+            @if (session('success'))
+                <x-alerts.alert-success :message="session('success')" />
+            @endif
 
             <a href="{{ route('posts.create') }}" class="text-m px-4 py-2 rounded"
                 style="background-color: var(--color-button-create); color: white;"

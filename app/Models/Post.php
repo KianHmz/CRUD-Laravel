@@ -14,6 +14,7 @@ class Post extends Model
         'title',
         'category',
         'description',
+        'user_id'
     ];
 
     /**
