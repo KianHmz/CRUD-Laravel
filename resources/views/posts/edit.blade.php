@@ -7,14 +7,15 @@
         <div class="max-w-3xl mx-auto my-8"
             style="background-color: var(--color-header); padding: 2rem; border-radius: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
 
-            <form method="POST" action="{{ route('posts.store') }}">
+            <form method="POST" action="{{ route('posts.update',$post->id) }}">
                 @csrf
+                @method('PUT')
 
                 <div class="mb-4">
                     <label for="title" class="block mb-1" style="color: var(--color-text);">Title</label>
                     <input type="text" id="title" name="title"
                         class="w-full px-3 py-2 rounded text-black placeholder-white"
-                        placeholder="Enter post title" value="{{old('title')}}"
+                        placeholder="Enter post title" value="{{old('title',$post->title)}}"
                         style="background-color: white;">
                     @error('title')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -25,7 +26,7 @@
                     <label for="category" class="block mb-1" style="color: var(--color-text);">Category</label>
                     <input type="text" id="category" name="category"
                         class="w-full px-3 py-2 rounded text-black placeholder-white"
-                        placeholder="Enter post category" value="{{old('category')}}"
+                        placeholder="Enter post category" value="{{old('category',$post->category)}}"
                         style="background-color: white;">
                     @error('category')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -34,9 +35,9 @@
 
                 <div class="mb-6">
                     <label for="description" class="block mb-1" style="color: var(--color-text);">Description</label>
-                    <textarea id="description" name="description" rows="5" 
+                    <textarea id="description" name="description" rows="5"
                         class="w-full px-3 py-2 rounded text-black placeholder-white" placeholder="Write post description..."
-                        style="background-color: white;">{{old('description')}}</textarea>
+                        style="background-color: white;">{{old('description',$post->description)}}</textarea>
                     @error('description')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror

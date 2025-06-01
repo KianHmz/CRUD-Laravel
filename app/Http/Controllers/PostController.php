@@ -49,7 +49,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit');
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -57,7 +57,8 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        //
+        $post->update ($request->validated());
+        return redirect()->route('posts.index')->with('success', "Post {$post->id} updated.");
     }
 
     /**
