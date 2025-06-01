@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class PostController extends Controller
+class PostController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('auth', except: ['index', 'show'])
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -57,7 +66,7 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        $post->update ($request->validated());
+        $post->update($request->validated());
         return redirect()->route('posts.index')->with('success', "Post {$post->id} updated.");
     }
 
