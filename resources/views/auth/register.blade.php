@@ -50,9 +50,9 @@
 
                 <div class="flex justify-between">
                     <a href="{{ route('login') }}" class="px-4 py-2 rounded"
-                        style="background-color: var(--color-button-delete); color: white;"
-                        onmouseover="this.style.backgroundColor='var(--color-button-delete-hover)'"
-                        onmouseout="this.style.backgroundColor='var(--color-button-delete)'">
+                        style="background-color: var(--color-button-edit); color: white;"
+                        onmouseover="this.style.backgroundColor='var(--color-button-edit-hover)'"
+                        onmouseout="this.style.backgroundColor='var(--color-button-edit)'">
                         Back to Login
                     </a>
                     <button type="submit" class="px-4 py-2 rounded"
