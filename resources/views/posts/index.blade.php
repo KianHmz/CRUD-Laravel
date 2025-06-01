@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="p-6">
-        <div class="max-w-5xl mx-auto my-2">
+        <div class="max-w-6xl mx-auto my-2">
 
             @if (session('success'))
                 <x-alerts.alert-success :message="session('success')" />

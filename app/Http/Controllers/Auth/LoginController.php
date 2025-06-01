@@ -18,7 +18,7 @@ class LoginController extends Controller
     {
         if (Auth::attempt($request->validated())) {
             $request->session()->regenerate();
-            redirect()->route('posts.index')->with("You logged in as {$request->name}");
+            return redirect()->route('posts.index')->with("You logged in as {$request->name}");
         }
         return back()->withErrors(['password' => 'The password is incorrect.'])->onlyInput('email');
     }
