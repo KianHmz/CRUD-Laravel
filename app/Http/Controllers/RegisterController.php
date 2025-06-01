@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
     public function show()
     {
-        # code...
+        return view('auth.register');
     }
 
-    public function register()
+    public function register(RegisterRequest $request)
     {
-        # code...
+        $data = $request->validated();
+        $data['password'] = bcrypt($data['password']);
+        User::create($data);
+        return redirect()->route('login')->with('success', 'You registered. Please login to your account.');
     }
 }
