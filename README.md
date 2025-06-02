@@ -64,7 +64,7 @@ Copy the `.env.example` file and set your environment variables:
 cp .env.example .env
 ```
 
-### 🗃️ 5. Setup the Database
+### 5. Setup the Database
 
 Edit `.env` and set your DB credentials, then run migrations and seeders:
 
