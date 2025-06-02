@@ -11,14 +11,12 @@
             @endif
 
             @auth
-                @if (auth()->user()->name === 'admin')
-                    <a href="{{ route('posts.create') }}" class="text-m px-4 py-2 rounded"
-                        style="background-color: var(--color-button-create); color: white;"
-                        onmouseover="this.style.backgroundColor='var(--color-button-create-hover)'"
-                        onmouseout="this.style.backgroundColor='var(--color-button-create)'">
-                        New Post
-                    </a>
-                @endif
+                <a href="{{ route('posts.create') }}" class="text-m px-4 py-2 rounded"
+                    style="background-color: var(--color-button-create); color: white;"
+                    onmouseover="this.style.backgroundColor='var(--color-button-create-hover)'"
+                    onmouseout="this.style.backgroundColor='var(--color-button-create)'">
+                    New Post
+                </a>
             @endauth
 
             <div class="mt-5 shadow rounded-xl overflow-hidden" style="background-color: var(--color-header);">
@@ -29,11 +27,7 @@
                             <th class="px-6 py-3">Title</th>
                             <th class="px-6 py-3">Author</th>
                             <th class="px-6 py-3">Created At</th>
-                            @auth
-                                @if (auth()->user()->name === 'admin')
-                                    <th class="px-6 py-3">Actions</th>
-                                @endif
-                            @endauth
+                            <th class="px-6 py-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y" style="border-color: var(--color-border);">
@@ -45,7 +39,7 @@
                                 <td class="px-6 py-4">{{ $post->user_id }}</td>
                                 <td class="px-6 py-4">{{ $post->created_at }}</td>
                                 @auth
-                                    @if (auth()->user()->name === 'admin')
+                                    @if (Auth::id() === $post->user->id)
                                         <td class="px-6 py-4">
                                             <a href="{{ route('posts.edit', $post->id) }}" class="text-sm px-3 py-1 rounded"
                                                 style="background-color: var(--color-button-edit); color: white;"

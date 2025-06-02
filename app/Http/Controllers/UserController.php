@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -22,6 +23,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->name !== 'admin')
+            abort(403);
+
         return view('users.create');
     }
 
@@ -30,6 +34,9 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        if (Auth::user()->name !== 'admin')
+            abort(403);
+
         $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
         $user = User::create($data);
@@ -49,6 +56,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (Auth::user()->name !== 'admin')
+            abort(403);
 
         return view('users.edit', compact('user'));
     }
@@ -58,16 +67,16 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $data = $request->validated();
+        if (Auth::user()->name !== 'admin')
+            abort(403);
 
+        $data = $request->validated();
         if (!empty($data['password'])) {
             $data['password'] = bcrypt($data['password']);
         } else {
             unset($data['password']);
         }
-
         $user->update($data);
-
         return redirect()->route('users.index')->with('success', "User {$user->id} updated!");
     }
 
@@ -76,6 +85,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if (Auth::user()->name !== 'admin')
+            abort(403);
+
         User::destroy($user->id);
         return redirect()->route('users.index')->with('success', "User {$user->id} deleted!");
     }

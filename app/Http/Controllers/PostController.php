@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -40,7 +41,7 @@ class PostController extends Controller implements HasMiddleware
     public function store(PostRequest $request)
     {
         $data = $request->validated();
-        $data['user_id'] = 3;
+        $data['user_id'] = Auth::id();
         $post = Post::create($data);
         return redirect()->route('posts.index')->with('success', "Post {$post->id} created.");
     }
@@ -58,6 +59,9 @@ class PostController extends Controller implements HasMiddleware
      */
     public function edit(Post $post)
     {
+        if (Auth::id() !== $post->user->id)
+            abort(403);
+
         return view('posts.edit', compact('post'));
     }
 
@@ -66,6 +70,9 @@ class PostController extends Controller implements HasMiddleware
      */
     public function update(PostRequest $request, Post $post)
     {
+        if (Auth::id() !== $post->user->id)
+            abort(403);
+
         $post->update($request->validated());
         return redirect()->route('posts.index')->with('success', "Post {$post->id} updated.");
     }
@@ -75,6 +82,9 @@ class PostController extends Controller implements HasMiddleware
      */
     public function destroy(Post $post)
     {
+        if (Auth::id() !== $post->user->id)
+            abort(403);
+
         $post->destroy($post->id);
         return redirect()->route('posts.index')->with('success', "Post {$post->id} deleted.");
     }
