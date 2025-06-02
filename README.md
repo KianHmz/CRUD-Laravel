@@ -62,6 +62,7 @@ Copy the `.env.example` file and set your environment variables:
 
 ```bash
 cp .env.example .env
+php artisan key:generate
 ```
 
 ### 5. Setup the Database
