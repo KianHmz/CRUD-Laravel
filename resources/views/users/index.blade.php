@@ -11,7 +11,7 @@
             @endif
 
             @auth
-                @if (auth()->user()->name === 'admin')
+                @if (Auth::user()->isAdmin())
                     <a href="{{ route('users.create') }}" class="text-m px-4 py-2 rounded"
                         style="background-color: var(--color-button-create); color: white;"
                         onmouseover="this.style.backgroundColorF= 'var(--color-button-create-hover)'"
@@ -29,7 +29,7 @@
                             <th class="px-6 py-3">Name</th>
                             <th class="px-6 py-3">Email</th>
                             @auth
-                                @if (auth()->user()->name === 'admin')
+                                @if (Auth::user()->isAdmin())
                                     <th class="px-6 py-3">Actions</th>
                                 @endif
                             @endauth
@@ -43,7 +43,7 @@
                                 <td class="px-6 py-4">{{ $user->name }}</td>
                                 <td class="px-6 py-4">{{ $user->email }}</td>
                                 @auth
-                                    @if (auth()->user()->name === 'admin')
+                                    @if (Auth::user()->isAdmin())
                                         <td class="px-6 py-4">
                                             <a href="{{ route('users.edit', $user->id) }}" class="text-sm px-3 py-1 rounded"
                                                 style="background-color: var(--color-button-edit); color: white;"
