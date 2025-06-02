@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Auth;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -59,7 +60,7 @@ class PostController extends Controller implements HasMiddleware
      */
     public function edit(Post $post)
     {
-        if (Auth::id() !== $post->user->id)
+        if (Gate::denies('edit-post', $post))
             abort(403);
 
         return view('posts.edit', compact('post'));
@@ -70,7 +71,7 @@ class PostController extends Controller implements HasMiddleware
      */
     public function update(PostRequest $request, Post $post)
     {
-        if (Auth::id() !== $post->user->id)
+        if (Gate::denies('edit-post', $post))
             abort(403);
 
         $post->update($request->validated());
@@ -82,7 +83,7 @@ class PostController extends Controller implements HasMiddleware
      */
     public function destroy(Post $post)
     {
-        if (Auth::id() !== $post->user->id)
+        if (Gate::denies('edit-post', $post))
             abort(403);
 
         $post->destroy($post->id);

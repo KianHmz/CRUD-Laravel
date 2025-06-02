@@ -39,7 +39,7 @@
                                 <td class="px-6 py-4">{{ $post->user_id }}</td>
                                 <td class="px-6 py-4">{{ $post->created_at }}</td>
                                 @auth
-                                    @if (Auth::id() === $post->user->id)
+                                    @can('edit-post', $post)
                                         <td class="px-6 py-4">
                                             <a href="{{ route('posts.edit', $post->id) }}" class="text-sm px-3 py-1 rounded"
                                                 style="background-color: var(--color-button-edit); color: white;"
@@ -47,8 +47,7 @@
                                                 onmouseout="this.style.backgroundColor='var(--color-button-edit)'">
                                                 Edit
                                             </a>
-                                            <form action="{{ route('posts.destroy', $post->id) }}" method="post"
-                                                class="inline">
+                                            <form action="{{ route('posts.destroy', $post->id) }}" method="post" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="text-sm px-3 py-1 rounded ml-2"
@@ -59,7 +58,7 @@
                                                 </button>
                                             </form>
                                         </td>
-                                    @endif
+                                    @endcan
                                 @endauth
                             </tr>
                         @endforeach
