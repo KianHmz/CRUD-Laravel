@@ -4,6 +4,10 @@ A simple, clean, and efficient Laravel-based CRUD application that supports full
 
 ---
 
+[Screenshots](#screenshots)
+
+---
+
 ## Built With
 
 ![Laravel](https://img.shields.io/badge/Laravel-framework-red?logo=laravel&logoColor=white)
@@ -16,7 +20,7 @@ A simple, clean, and efficient Laravel-based CRUD application that supports full
 ## Features
 
 ### Backend (Laravel)
-- **Authentication** – Login & Registration using Laravel Breeze or Jetstream.
+- **Authentication** – Login & Registration using Laravel Breeze.
 - **Authorization** – Fine-grained access control using Laravel **Gate**.
 - **CRUD Functionality** – Full Create, Read, Update, Delete support.
 - **Eloquent ORM** – Clean and expressive database interaction.
@@ -90,3 +94,13 @@ Use the authentication system to create a user. Try:
 - Password: `admin`
 
 Or register a new user and test the full authentication + authorization flow.
+
+
+## Screenshots
+
+![posts-screenshot](screenshots/posts-screenshot.png)
+![newpost-screenshot](screenshots/newpost-screenshot.png)
+![users-screenshot](screenshots/users-screenshot.png)
+![register-screenshot](screenshots/register-screenshot.png)
+![login-screenshot](screenshots/login-screenshot.png)
+
