@@ -15,8 +15,4 @@ services:
       name: data
       mountPath: /data
       sizeGB: 1
-    startCommand: |
-      cp .env.example .env
-      php artisan key:generate
-      php artisan migrate --force
-      apache2-foreground
+    startCommand: apache2-foreground
