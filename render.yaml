@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: crud-laravel
+    runtime: docker
+    repo: https://github.com/KianHmz/CRUD-Laravel
+    plan: free
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: /data/database.sqlite
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+    startCommand: |
+      php artisan migrate --force && php artisan serve --host 0.0.0.0 --port 10000
+    autoDeploy: true
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
